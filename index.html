@@ -96,6 +96,12 @@
         }
         .definition-text { font-size: 1.125rem; line-height: 1.8; font-style: italic; margin-bottom: 1rem; }
         .definition-source { font-size: 0.875rem; color: var(--text-secondary); font-style: normal; }
+        .about-card {
+            background: var(--bg-secondary); border-radius: 16px; padding: 2rem; margin: 2.5rem 0;
+            border-left: 4px solid var(--accent);
+        }
+        .about-title { font-size: 1.5rem; color: var(--text-primary); margin-bottom: 1rem; }
+        .about-text { font-size: 1rem; color: var(--text-secondary); line-height: 1.8; }
         .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 2.5rem 0; }
         .feature-card {
             background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px;
@@ -130,7 +136,9 @@
         .framework-section-text { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; }
         .framework-source { font-size: 0.8125rem; color: var(--text-secondary); font-style: italic; padding-top: 1rem; border-top: 1px solid var(--border); margin-top: 1rem; }
         .exercises-container { display: flex; flex-direction: column; gap: 2rem; }
-        .exercise-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; }
+        .exercise-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; position: relative; }
+        .exercise-progress-indicator { text-align: center; margin-bottom: 1rem; color: var(--text-secondary); font-size: 0.875rem; }
+        .exercise-progress-indicator strong { color: var(--accent); }
         .exercise-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
         .exercise-number { width: 36px; height: 36px; background: var(--accent); color: var(--bg-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.875rem; }
         .exercise-title { font-size: 1.25rem; color: var(--text-primary); }
@@ -160,8 +168,9 @@
         .flashcard-section { margin-bottom: 1rem; text-align: left; width: 100%; }
         .flashcard-section-title { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
         .flashcard-section-text { font-size: 0.875rem; color: var(--text-primary); }
-        .flashcard-controls { display: flex; justify-content: center; gap: 1rem; align-items: center; }
+        .flashcard-controls { display: flex; justify-content: center; gap: 1rem; align-items: center; flex-wrap: wrap; }
         .card-counter { font-size: 0.875rem; color: var(--text-secondary); }
+        .flashcard-stats { display: flex; align-items: center; gap: 1rem; justify-content: center; margin-top: 1rem; }
         .argument-display { background: var(--bg-card); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; font-size: 1rem; line-height: 1.7; }
         .star-rating { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; }
         .star { font-size: 2rem; color: var(--border); cursor: pointer; transition: all 0.2s ease; }
@@ -223,6 +232,10 @@
         .challenge-type { background: var(--accent); color: var(--bg-primary); padding: 0.375rem 1rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
         .challenge-prompt { font-size: 1.25rem; line-height: 1.7; color: var(--text-primary); margin-bottom: 2rem; padding: 1.5rem; background: var(--bg-primary); border-radius: 12px; border-left: 4px solid var(--accent); }
         .challenge-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .hint-box { background: var(--bg-primary); border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem; display: none; border-left: 3px solid var(--accent); }
+        .hint-box.show { display: block; animation: fadeIn 0.4s ease; }
+        .hint-title { font-size: 0.875rem; color: var(--accent); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .hint-text { font-size: 1rem; color: var(--text-secondary); line-height: 1.6; }
         .streak-tracker { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 2rem; }
         .streak-display { display: flex; align-items: center; gap: 0.5rem; background: var(--bg-secondary); padding: 1rem 2rem; border-radius: 12px; }
         .streak-number { font-size: 2rem; font-weight: 700; color: var(--accent); }
@@ -238,6 +251,10 @@
         .submit-status { display: none; align-items: center; gap: 0.5rem; color: var(--success); font-size: 0.875rem; }
         .submit-status.show { display: flex; }
         .checkmark { width: 20px; height: 20px; background: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; }
+        .completion-message { background: var(--bg-primary); border: 1px solid var(--accent); border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem; text-align: center; display: none; }
+        .completion-message.show { display: block; animation: fadeIn 0.4s ease; }
+        .completion-text { font-size: 1.125rem; color: var(--text-primary); margin-bottom: 1rem; }
+        .completion-text::before { content: '✓ '; color: var(--success); font-weight: bold; }
         .toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--bg-card); color: var(--text-primary); padding: 1rem 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent); display: flex; align-items: center; gap: 0.75rem; transform: translateX(400px); opacity: 0; transition: all 0.4s ease; z-index: 2000; }
         .toast.show { transform: translateX(0); opacity: 1; }
         .footer { background: var(--bg-secondary); border-top: 1px solid var(--border); padding: 2rem 4rem; text-align: center; margin-top: 4rem; }
@@ -317,6 +334,10 @@
                         <h3 class="feature-title">Problem-Solving Confidence</h3>
                         <p class="feature-desc">Approach complex challenges with structured frameworks and proven methodologies.</p>
                     </div>
+                </div>
+                <div class="about-card">
+                    <h3 class="about-title">Why ThinkSharp Exists</h3>
+                    <p class="about-text">ThinkSharp was built by Mushtaq Khan, an MSc Accounting & Financial Management student at the University of Gothenburg. After noticing that finance education trains us to process information but rarely to question it deeply, he set out to build a free, research-backed tool that bridges that gap. Every framework and exercise here is grounded in peer-reviewed cognitive science — because thinking well is a skill, and skills can be developed.</p>
                 </div>
                 <div class="fact-ticker">
                     <span class="ticker-label">Did You Know?</span>
@@ -427,7 +448,8 @@
                     <p class="section-subtitle">Sharpen your skills with interactive exercises</p>
                 </div>
                 <div class="exercises-container">
-                    <div class="exercise-card">
+                    <div class="exercise-card" id="exercise-1">
+                        <div class="exercise-progress-indicator">Exercise <strong>1</strong> of 4</div>
                         <div class="exercise-header"><span class="exercise-number">1</span><h3 class="exercise-title">Assumption Detector</h3></div>
                         <p style="color: var(--text-secondary); margin-bottom: 1rem;">Identify the hidden assumptions in the statement below. What beliefs must someone hold for this statement to make sense?</p>
                         <div class="statement-box" id="assumption-statement">"Social media is harmful to teenagers."</div>
@@ -440,8 +462,13 @@
                             <h4 class="model-answer-title">Key Assumptions:</h4>
                             <ul class="assumption-list" id="assumption-list"></ul>
                         </div>
+                        <div class="completion-message" id="completion-1">
+                            <p class="completion-text">Well done! Ready for the next exercise?</p>
+                            <button class="btn btn-primary" onclick="scrollToExercise(2)">Go to Exercise 2 →</button>
+                        </div>
                     </div>
-                    <div class="exercise-card">
+                    <div class="exercise-card" id="exercise-2">
+                        <div class="exercise-progress-indicator">Exercise <strong>2</strong> of 4</div>
                         <div class="exercise-header"><span class="exercise-number">2</span><h3 class="exercise-title">Fallacy Flashcards</h3></div>
                         <p style="color: var(--text-secondary); margin-bottom: 1rem; text-align: center;">Click the card to flip and learn common logical fallacies</p>
                         <div class="flashcard-container">
@@ -462,9 +489,17 @@
                             <span class="card-counter"><span id="card-current">1</span> / <span id="card-total">10</span></span>
                             <button class="btn btn-secondary" onclick="nextCard()">Next →</button>
                         </div>
-                        <p style="text-align: center; margin-top: 1rem; color: var(--text-secondary); font-size: 0.875rem;">Cards reviewed: <strong id="cards-reviewed" style="color: var(--accent);">0</strong></p>
+                        <div class="flashcard-stats">
+                            <p style="color: var(--text-secondary); font-size: 0.875rem;">Cards reviewed: <strong id="cards-reviewed" style="color: var(--accent);">0</strong></p>
+                            <button class="btn btn-secondary" onclick="resetCards()" style="font-size: 0.75rem; padding: 0.5rem 1rem;">Reset Cards</button>
+                        </div>
+                        <div class="completion-message" id="completion-2">
+                            <p class="completion-text">Well done! Ready for the next exercise?</p>
+                            <button class="btn btn-primary" onclick="scrollToExercise(3)">Go to Exercise 3 →</button>
+                        </div>
                     </div>
-                    <div class="exercise-card">
+                    <div class="exercise-card" id="exercise-3">
+                        <div class="exercise-progress-indicator">Exercise <strong>3</strong> of 4</div>
                         <div class="exercise-header"><span class="exercise-number">3</span><h3 class="exercise-title">Argument Strength Rater</h3></div>
                         <p style="color: var(--text-secondary); margin-bottom: 1rem;">Read the argument below and rate its strength from 1-5 stars based on evidence, logic, and clarity.</p>
                         <div class="argument-display" id="argument-text">"We should implement a four-day workweek because studies from multiple countries show it increases productivity by 20% and improves employee well-being without reducing output."</div>
@@ -479,9 +514,14 @@
                             <div class="rating-result"><span class="expert-score" id="expert-score">4/5</span><span id="match-badge" class="score-match">Match!</span></div>
                             <p id="expert-explanation" style="color: var(--text-secondary); line-height: 1.7;"></p>
                         </div>
+                        <div class="completion-message" id="completion-3">
+                            <p class="completion-text">Well done! Ready for the next exercise?</p>
+                            <button class="btn btn-primary" onclick="scrollToExercise(4)">Go to Exercise 4 →</button>
+                        </div>
                         <p style="text-align: center; margin-top: 1.5rem; color: var(--text-secondary); font-size: 0.9375rem;">Score: <strong id="rater-score" style="color: var(--accent);">0/0</strong> matched expert judgment</p>
                     </div>
-                    <div class="exercise-card">
+                    <div class="exercise-card" id="exercise-4">
+                        <div class="exercise-progress-indicator">Exercise <strong>4</strong> of 4</div>
                         <div class="exercise-header"><span class="exercise-number">4</span><h3 class="exercise-title">Socratic Self-Dialogue</h3></div>
                         <p style="color: var(--text-secondary); margin-bottom: 1rem;">Enter a belief or opinion you hold. The tool will generate probing questions to help you examine it more deeply.</p>
                         <input type="text" class="dialogue-input" id="belief-input" placeholder='Example: "I believe remote work is more productive than office work"'>
@@ -489,6 +529,10 @@
                         <div class="questions-output" id="questions-output">
                             <h4 class="model-answer-title">Socratic Questions to Consider:</h4>
                             <div id="questions-list"></div>
+                        </div>
+                        <div class="completion-message" id="completion-4">
+                            <p class="completion-text">Excellent work! You've completed all exercises.</p>
+                            <button class="btn btn-primary" onclick="navigateToSection('progress')">Track Your Progress →</button>
                         </div>
                     </div>
                 </div>
@@ -502,43 +546,43 @@
                     <div class="skills-panel">
                         <h3 style="margin-bottom: 1.5rem; color: var(--text-primary);">Core Skills</h3>
                         <div class="skill-item">
-                            <div class="skill-header"><span class="skill-name">Analysis</span><span class="skill-value" id="value-analysis">50</span></div>
-                            <input type="range" class="skill-slider" id="slider-analysis" min="0" max="100" value="50" oninput="updateSkill('analysis', this.value)">
-                            <div class="skill-bar"><div class="skill-fill" id="fill-analysis" style="width: 50%"></div></div>
+                            <div class="skill-header"><span class="skill-name">Analysis</span><span class="skill-value" id="value-analysis">0</span></div>
+                            <input type="range" class="skill-slider" id="slider-analysis" min="0" max="100" value="0" oninput="updateSkill('analysis', this.value)">
+                            <div class="skill-bar"><div class="skill-fill" id="fill-analysis" style="width: 0%"></div></div>
                         </div>
                         <div class="skill-item">
-                            <div class="skill-header"><span class="skill-name">Inference</span><span class="skill-value" id="value-inference">50</span></div>
-                            <input type="range" class="skill-slider" id="slider-inference" min="0" max="100" value="50" oninput="updateSkill('inference', this.value)">
-                            <div class="skill-bar"><div class="skill-fill" id="fill-inference" style="width: 50%"></div></div>
+                            <div class="skill-header"><span class="skill-name">Inference</span><span class="skill-value" id="value-inference">0</span></div>
+                            <input type="range" class="skill-slider" id="slider-inference" min="0" max="100" value="0" oninput="updateSkill('inference', this.value)">
+                            <div class="skill-bar"><div class="skill-fill" id="fill-inference" style="width: 0%"></div></div>
                         </div>
                         <div class="skill-item">
-                            <div class="skill-header"><span class="skill-name">Evaluation</span><span class="skill-value" id="value-evaluation">50</span></div>
-                            <input type="range" class="skill-slider" id="slider-evaluation" min="0" max="100" value="50" oninput="updateSkill('evaluation', this.value)">
-                            <div class="skill-bar"><div class="skill-fill" id="fill-evaluation" style="width: 50%"></div></div>
+                            <div class="skill-header"><span class="skill-name">Evaluation</span><span class="skill-value" id="value-evaluation">0</span></div>
+                            <input type="range" class="skill-slider" id="slider-evaluation" min="0" max="100" value="0" oninput="updateSkill('evaluation', this.value)">
+                            <div class="skill-bar"><div class="skill-fill" id="fill-evaluation" style="width: 0%"></div></div>
                         </div>
                         <div class="skill-item">
-                            <div class="skill-header"><span class="skill-name">Explanation</span><span class="skill-value" id="value-explanation">50</span></div>
-                            <input type="range" class="skill-slider" id="slider-explanation" min="0" max="100" value="50" oninput="updateSkill('explanation', this.value)">
-                            <div class="skill-bar"><div class="skill-fill" id="fill-explanation" style="width: 50%"></div></div>
+                            <div class="skill-header"><span class="skill-name">Explanation</span><span class="skill-value" id="value-explanation">0</span></div>
+                            <input type="range" class="skill-slider" id="slider-explanation" min="0" max="100" value="0" oninput="updateSkill('explanation', this.value)">
+                            <div class="skill-bar"><div class="skill-fill" id="fill-explanation" style="width: 0%"></div></div>
                         </div>
                         <div class="skill-item">
-                            <div class="skill-header"><span class="skill-name">Self-Regulation</span><span class="skill-value" id="value-regulation">50</span></div>
-                            <input type="range" class="skill-slider" id="slider-regulation" min="0" max="100" value="50" oninput="updateSkill('regulation', this.value)">
-                            <div class="skill-bar"><div class="skill-fill" id="fill-regulation" style="width: 50%"></div></div>
+                            <div class="skill-header"><span class="skill-name">Self-Regulation</span><span class="skill-value" id="value-regulation">0</span></div>
+                            <input type="range" class="skill-slider" id="slider-regulation" min="0" max="100" value="0" oninput="updateSkill('regulation', this.value)">
+                            <div class="skill-bar"><div class="skill-fill" id="fill-regulation" style="width: 0%"></div></div>
                         </div>
                         <div class="skill-item">
-                            <div class="skill-header"><span class="skill-name">Interpretation</span><span class="skill-value" id="value-interpretation">50</span></div>
-                            <input type="range" class="skill-slider" id="slider-interpretation" min="0" max="100" value="50" oninput="updateSkill('interpretation', this.value)">
-                            <div class="skill-bar"><div class="skill-fill" id="fill-interpretation" style="width: 50%"></div></div>
+                            <div class="skill-header"><span class="skill-name">Interpretation</span><span class="skill-value" id="value-interpretation">0</span></div>
+                            <input type="range" class="skill-slider" id="slider-interpretation" min="0" max="100" value="0" oninput="updateSkill('interpretation', this.value)">
+                            <div class="skill-bar"><div class="skill-fill" id="fill-interpretation" style="width: 0%"></div></div>
                         </div>
                     </div>
                     <div class="score-panel">
                         <h3 style="margin-bottom: 1rem; color: var(--text-primary);">Your CT Score</h3>
                         <div class="gauge-container">
                             <canvas id="scoreGauge" width="200" height="200"></canvas>
-                            <div class="ct-score"><div class="score-number" id="ct-score">50</div><div class="score-label">Overall</div></div>
+                            <div class="ct-score"><div class="score-number" id="ct-score">0</div><div class="score-label">Overall</div></div>
                         </div>
-                        <div class="level-badge" id="level-badge"><span class="level-icon">🔍</span><span class="level-text">Developing Thinker</span></div>
+                        <div class="level-badge" id="level-badge"><span class="level-icon">📋</span><span class="level-text">Start Your Assessment</span></div>
                         <div class="reflection-area">
                             <p class="reflection-label">What will you work on this week?</p>
                             <textarea class="user-input-area" id="weekly-goal" placeholder="Set your thinking goal..." style="min-height: 80px; font-size: 0.875rem;"></textarea>
@@ -572,7 +616,7 @@
                             <div class="resource-badges"><span class="badge badge-type">Book</span><span class="badge badge-difficulty">Intermediate</span></div>
                         </div>
                         <p class="resource-desc">Nobel Prize winner's exploration of the two systems that drive our thinking: fast, intuitive and slow, deliberate reasoning.</p>
-                        <a href="https://openlibrary.org" target="_blank" class="resource-link">Visit Resource →</a>
+                        <a href="https://openlibrary.org/works/OL15340036W" target="_blank" class="resource-link">Visit Resource →</a>
                     </div>
                     <div class="resource-card">
                         <div class="resource-header">
@@ -596,7 +640,7 @@
                             <div class="resource-badges"><span class="badge badge-type">Book</span><span class="badge badge-difficulty">Beginner</span></div>
                         </div>
                         <p class="resource-desc">A compact, accessible guide to constructing and evaluating arguments. Open access PDF available.</p>
-                        <a href="https://www.earlham.edu/~peters/courses/argrule.htm" target="_blank" class="resource-link">Visit Resource →</a>
+                        <a href="https://www.amazon.com/Rulebook-Arguments-Anthony-Weston/dp/1624664407" target="_blank" class="resource-link">Visit Resource →</a>
                     </div>
                 </div>
                 <div class="resource-content" id="tab-websites">
@@ -656,7 +700,7 @@
                             <div class="resource-badges"><span class="badge badge-type">Video</span><span class="badge badge-difficulty">Beginner</span></div>
                         </div>
                         <p class="resource-desc">Engaging, fast-paced introduction to philosophy and critical thinking concepts.</p>
-                        <a href="https://www.youtube.com/c/crashcourse" target="_blank" class="resource-link">Visit Resource →</a>
+                        <a href="https://www.youtube.com/playlist?list=PL8dPuuaLjXtNgK6MZucdYldNkMybYIHKR" target="_blank" class="resource-link">Visit Resource →</a>
                     </div>
                     <div class="resource-card">
                         <div class="resource-header">
@@ -680,7 +724,7 @@
                             <div class="resource-badges"><span class="badge badge-type">Video</span><span class="badge badge-difficulty">Intermediate</span></div>
                         </div>
                         <p class="resource-desc">Academic-quality videos on critical thinking, logic, and philosophy from top professors.</p>
-                        <a href="https://www.youtube.com/c/WirelessPhilosophy" target="_blank" class="resource-link">Visit Resource →</a>
+                        <a href="https://www.youtube.com/c/WirelessPhilosophy/videos" target="_blank" class="resource-link">Visit Resource →</a>
                     </div>
                 </div>
             </section>
@@ -707,8 +751,12 @@
                     <div class="challenge-prompt" id="challenge-prompt">Read this headline and identify the logical fallacy: "Famous Actor Endorses New Diet Pill — It Must Work!"</div>
                     <div class="challenge-actions">
                         <button class="btn btn-primary" onclick="shareChallenge()">Share Challenge</button>
-                        <button class="btn btn-secondary" onclick="showHint()">Get Hint</button>
+                        <button class="btn btn-secondary" onclick="toggleHint()">Get Hint</button>
                     </div>
+                </div>
+                <div class="hint-box" id="hint-box">
+                    <h4 class="hint-title">Hint</h4>
+                    <p class="hint-text" id="hint-text"></p>
                 </div>
                 <div class="reflection-section">
                     <div class="reflection-header">
@@ -721,7 +769,7 @@
             </section>
             <footer class="footer">
                 <p class="footer-text">Built on evidence-based research | Sources: Paul & Elder, Bloom, Toulmin, Flavell, Pearson</p>
-                <p class="footer-sources">ThinkSharp 2024 — Critical Thinking Development Platform</p>
+                <p class="footer-sources">ThinkSharp 2026 — Critical Thinking Development Platform</p>
             </footer>
         </main>
     </div>
@@ -757,6 +805,10 @@
             sidebar.classList.toggle('open');
         });
 
+        function scrollToExercise(num) {
+            document.getElementById('exercise-' + num).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
         // ==================== FACT TICKER ====================
         const tickerItems = document.querySelectorAll('.ticker-item');
         let currentTicker = 0;
@@ -779,7 +831,17 @@
             { text: "Remote workers are less productive than office workers.", assumptions: ["Productivity can only be measured by presence", "Home environments are universally distracting", "Office collaboration is essential for all jobs", "Workers need direct supervision to perform", "Commute time doesn't affect productivity"] },
             { text: "Higher education is always worth the cost.", assumptions: ["All degrees lead to higher earnings", "The college experience itself has universal value", "Alternative paths are inferior", "Student debt is manageable for everyone", "Traditional education is the only way to learn"] },
             { text: "Organic food is healthier than conventional food.", assumptions: ["Pesticide residues in conventional food are harmful", "Organic farming produces more nutritious food", "The price difference reflects real health benefits", "'Organic' certification guarantees quality", "Health is determined solely by production methods"] },
-            { text: "Artificial intelligence will replace most human jobs.", assumptions: ["AI capabilities will continue advancing linearly", "Human skills cannot adapt or complement AI", "Economic and social systems won't evolve", "All jobs can be broken down into algorithmic tasks", "New types of jobs won't emerge"] }
+            { text: "Artificial intelligence will replace most human jobs.", assumptions: ["AI capabilities will continue advancing linearly", "Human skills cannot adapt or complement AI", "Economic and social systems won't evolve", "All jobs can be broken down into algorithmic tasks", "New types of jobs won't emerge"] },
+            { text: "Investing in the stock market is the best way to build wealth.", assumptions: ["Stock market returns consistently outperform other investments", "All investors have equal access to market information", "Historical performance guarantees future results", "Individual investors can time the market effectively", "Risk tolerance is the same for everyone"] },
+            { text: "A university degree guarantees a better career.", assumptions: ["Employers universally value degrees over experience", "The job market rewards all degrees equally", "Skills learned in university directly transfer to workplaces", "Networking opportunities are only available at university", "Degree holders have better job security in all industries"] },
+            { text: "Remote work reduces productivity.", assumptions: ["Productivity can only be measured by hours spent at a desk", "Home environments are inherently more distracting than offices", "Collaboration requires physical presence", "Remote workers lack self-discipline", "Office culture doesn't itself reduce productivity"] },
+            { text: "Economic growth always improves people's quality of life.", assumptions: ["GDP growth translates directly to individual well-being", "Environmental and social costs are negligible", "Benefits of growth are distributed equitably", "Quality of life can be measured by economic output", "Sustainable alternatives cannot also drive prosperity"] },
+            { text: "Successful entrepreneurs are born, not made.", assumptions: ["Entrepreneurial traits are purely genetic", "Environment and education have minimal impact", "Failure is predetermined by innate characteristics", "Successful entrepreneurs share universal personality types", "Hard work and learning cannot develop entrepreneurial skills"] },
+            { text: "Stricter regulations always reduce business innovation.", assumptions: ["Regulations only create costs with no benefits", "Businesses cannot adapt to new requirements", "Innovation and compliance are mutually exclusive", "All regulations are equally burdensome", "Unregulated markets naturally produce optimal outcomes"] },
+            { text: "The free market is the most efficient way to allocate resources.", assumptions: ["All market participants have perfect information", "Externalities like pollution are insignificant", "Competition naturally exists in all sectors", "Self-interest always aligns with social good", "Market failures are rare and self-correcting"] },
+            { text: "Higher GDP means a country is doing well.", assumptions: ["Economic output captures all aspects of national success", "Income inequality doesn't matter if the total is high", "Environmental degradation is acceptable for growth", "Citizen happiness correlates directly with GDP", "Informal economies and unpaid work have no value"] },
+            { text: "Hard work alone is enough to succeed.", assumptions: ["Everyone starts with equal opportunities", "Systemic barriers don't exist or don't matter", "Luck and timing play no role in outcomes", "Success is purely individual effort", "Those who don't succeed simply didn't work hard enough"] },
+            { text: "Technology always makes our lives better.", assumptions: ["Technological progress has no negative consequences", "All problems can be solved with better technology", "Human values and social structures adapt automatically", "The benefits of technology are distributed fairly", "We can always control the technologies we create"] }
         ];
         let currentStatement = 0;
         function nextStatement() {
@@ -798,6 +860,7 @@
                 list.appendChild(li);
             });
             answerDiv.classList.add('show');
+            document.getElementById('completion-1').classList.add('show');
         }
 
         // ==================== FALLACY FLASHCARDS ====================
@@ -834,10 +897,22 @@
                 reviewedCards.add(currentCard);
                 cardsReviewed++;
                 document.getElementById('cards-reviewed').textContent = cardsReviewed;
+                localStorage.setItem('thinksharp_cardsReviewed', cardsReviewed);
+                if (cardsReviewed >= 10) {
+                    document.getElementById('completion-2').classList.add('show');
+                }
             }
         }
         function nextCard() { currentCard = (currentCard + 1) % fallacies.length; updateCard(); }
         function prevCard() { currentCard = (currentCard - 1 + fallacies.length) % fallacies.length; updateCard(); }
+        function resetCards() {
+            cardsReviewed = 0;
+            reviewedCards.clear();
+            document.getElementById('cards-reviewed').textContent = '0';
+            localStorage.setItem('thinksharp_cardsReviewed', '0');
+            document.getElementById('completion-2').classList.remove('show');
+            showToast('Cards reset successfully');
+        }
         document.getElementById('card-total').textContent = fallacies.length;
 
         // ==================== ARGUMENT RATER ====================
@@ -879,6 +954,9 @@
             userRatings.push(selectedRating === expertRating ? 1 : 0);
             updateRaterScore();
             expertDiv.classList.add('show');
+            if (userRatings.length >= 5) {
+                document.getElementById('completion-3').classList.add('show');
+            }
         }
         function nextArgument() {
             currentArgument = (currentArgument + 1) % arguments_list.length;
@@ -893,37 +971,98 @@
         }
 
         // ==================== SOCRATIC DIALOGUE ====================
-        const socraticQuestions = ["Why do you believe this?", "What evidence supports this belief?", "What would someone who disagrees say?", "What assumptions underlie this position?", "What are the strongest arguments against this?", "How did you come to hold this belief?", "What would change your mind?", "What are the implications if everyone believed this?", "Is this belief based on facts or feelings?", "What definitions are you using, and could they be interpreted differently?"];
+        const socraticQuestions = {
+            finance: [
+                "What evidence supports the claim that this financial strategy works?",
+                "What are the risks that proponents of this approach aren't discussing?",
+                "How would this advice apply to someone with different income or risk tolerance?",
+                "What fees, taxes, or hidden costs might reduce the returns?",
+                "What would a financial advisor who disagrees with this say?",
+                "How does this compare to a simple index fund strategy over 20 years?",
+                "What assumptions about market behavior does this rely on?",
+                "If everyone followed this advice, would it still work?"
+            ],
+            career: [
+                "What evidence do you have that this career path leads to fulfillment?",
+                "What would someone in a different industry say about this?",
+                "How much of success in this field is due to factors beyond individual control?",
+                "What are the opportunity costs of pursuing this direction?",
+                "How might this career look different in 10 years due to automation or trends?",
+                "What assumptions are you making about work-life balance?",
+                "What would you do if this career didn't work out as planned?",
+                "How does your definition of 'success' influence this belief?"
+            ],
+            social: [
+                "What evidence supports your view on this social issue?",
+                "How would someone from a different background interpret this situation?",
+                "What historical precedents might challenge this perspective?",
+                "What assumptions about human nature underlie your position?",
+                "What would it take to change your mind on this?",
+                "How do your personal experiences bias your view?",
+                "What are the strongest counter-arguments to your position?",
+                "If this policy were implemented, what unintended consequences might arise?"
+            ],
+            general: [
+                "Why do you believe this?",
+                "What evidence supports this belief?",
+                "What would someone who disagrees say?",
+                "What assumptions underlie this position?",
+                "What are the strongest arguments against this?",
+                "How did you come to hold this belief?",
+                "What would change your mind?",
+                "What are the implications if everyone believed this?",
+                "Is this belief based on facts or feelings?",
+                "What definitions are you using, and could they be interpreted differently?"
+            ]
+        };
+
         function generateQuestions() {
-            const belief = document.getElementById('belief-input').value.trim();
+            const belief = document.getElementById('belief-input').value.trim().toLowerCase();
             if (!belief) { showToast('Please enter a belief first!'); return; }
+            
             const output = document.getElementById('questions-output');
             const list = document.getElementById('questions-list');
             list.innerHTML = '';
-            const shuffled = [...socraticQuestions].sort(() => 0.5 - Math.random());
+            
+            // Determine category based on keywords
+            let category = 'general';
+            const financeWords = ['money', 'wealth', 'invest', 'finance', 'rich', 'stock', 'market', 'portfolio', 'savings', 'debt', 'loan', 'bank', 'crypto', 'bitcoin'];
+            const careerWords = ['success', 'work', 'career', 'job', 'promotion', 'salary', 'wage', 'employment', 'profession', 'industry', 'company', 'boss', 'manager'];
+            const socialWords = ['people', 'society', 'government', 'politics', 'policy', 'election', 'vote', 'democracy', 'rights', 'freedom', 'law', 'regulation', 'tax'];
+            
+            if (financeWords.some(word => belief.includes(word))) category = 'finance';
+            else if (careerWords.some(word => belief.includes(word))) category = 'career';
+            else if (socialWords.some(word => belief.includes(word))) category = 'social';
+            
+            const shuffled = [...socraticQuestions[category]].sort(() => 0.5 - Math.random());
             const selected = shuffled.slice(0, 5);
+            
             selected.forEach(question => {
                 const div = document.createElement('div');
                 div.className = 'question-item';
                 div.textContent = question;
                 list.appendChild(div);
             });
+            
             output.classList.add('show');
+            document.getElementById('completion-4').classList.add('show');
         }
 
         // ==================== PROGRESS TRACKER ====================
-        let skills = { analysis: 50, inference: 50, evaluation: 50, explanation: 50, regulation: 50, interpretation: 50 };
+        let skills = { analysis: 0, inference: 0, evaluation: 0, explanation: 0, regulation: 0, interpretation: 0 };
         let scoreGauge = null;
+        let hasInteracted = false;
         function initGauge() {
             const ctx = document.getElementById('scoreGauge').getContext('2d');
             scoreGauge = new Chart(ctx, {
                 type: 'doughnut',
-                data: { datasets: [{ data: [50, 50], backgroundColor: ['#f5a623', '#2a3450'], borderWidth: 0, cutout: '75%' }] },
+                data: { datasets: [{ data: [0, 100], backgroundColor: ['#f5a623', '#2a3450'], borderWidth: 0, cutout: '75%' }] },
                 options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false }, tooltip: { enabled: false } }, rotation: -90, circumference: 180 }
             });
         }
         function updateSkill(skill, value) {
             skills[skill] = parseInt(value);
+            hasInteracted = true;
             document.getElementById('value-' + skill).textContent = value;
             document.getElementById('fill-' + skill).style.width = value + '%';
             updateCTScore();
@@ -939,7 +1078,8 @@
         function updateLevelBadge(score) {
             const badge = document.getElementById('level-badge');
             let icon, text;
-            if (score < 40) { icon = '🌱'; text = 'Emerging Thinker'; }
+            if (!hasInteracted && score === 0) { icon = '📋'; text = 'Start Your Assessment'; }
+            else if (score < 40) { icon = '🌱'; text = 'Emerging Thinker'; }
             else if (score < 60) { icon = '🔍'; text = 'Developing Thinker'; }
             else if (score < 80) { icon = '🧠'; text = 'Practiced Thinker'; }
             else { icon = '⚡'; text = 'Master Thinker'; }
@@ -947,11 +1087,12 @@
         }
         function resetProgress() {
             if (confirm('Are you sure you want to reset all your progress? This cannot be undone.')) {
-                skills = { analysis: 50, inference: 50, evaluation: 50, explanation: 50, regulation: 50, interpretation: 50 };
+                skills = { analysis: 0, inference: 0, evaluation: 0, explanation: 0, regulation: 0, interpretation: 0 };
+                hasInteracted = false;
                 Object.keys(skills).forEach(skill => {
-                    document.getElementById('slider-' + skill).value = 50;
-                    document.getElementById('value-' + skill).textContent = 50;
-                    document.getElementById('fill-' + skill).style.width = '50%';
+                    document.getElementById('slider-' + skill).value = 0;
+                    document.getElementById('value-' + skill).textContent = 0;
+                    document.getElementById('fill-' + skill).style.width = '0%';
                 });
                 document.getElementById('weekly-goal').value = '';
                 updateCTScore();
@@ -975,21 +1116,29 @@
 
         // ==================== DAILY CHALLENGE ====================
         const challenges = [
-            { type: "Spot the Fallacy", prompt: "Read this headline and identify the logical fallacy: 'Famous Actor Endorses New Diet Pill — It Must Work!'", hint: "Think about whether a celebrity's expertise in acting translates to nutrition science." },
-            { type: "Identify Assumptions", prompt: "A policy states: 'All citizens must vote or pay a fine.' What assumptions underlie this policy?", hint: "Consider what beliefs about democracy, citizenship, and enforcement are implicit here." },
-            { type: "Steel-Man Argument", prompt: "Write the strongest possible argument FOR a position you disagree with.", hint: "The goal is to understand, not agree. What would a smart, well-meaning person say?" },
-            { type: "Alternative Explanations", prompt: "Fact: Crime rates dropped in the 1990s. Find 3 alternative explanations.", hint: "Think about demographics, technology, economic factors, or cultural shifts." },
-            { type: "Spot the Fallacy", prompt: "'We've always done it this way, so it must be the right way.' What fallacy is this?", hint: "This is one of the most common fallacies in organizations and traditions." },
-            { type: "Identify Assumptions", prompt: "'Hard work always leads to success.' What assumptions does this statement rely on?", hint: "Consider factors outside individual control that might affect outcomes." },
-            { type: "Steel-Man Argument", prompt: "Argue FOR a technology or trend you personally dislike or avoid.", hint: "What benefits do others see that you might be overlooking?" }
+            { type: "Spot the Fallacy", prompt: "Read this headline and identify the logical fallacy: 'Famous Actor Endorses New Diet Pill — It Must Work!'", hint: "Think about whether a celebrity's expertise in acting translates to nutrition science. Would you trust an actor to perform surgery?" },
+            { type: "Identify Assumptions", prompt: "A policy states: 'All citizens must vote or pay a fine.' What assumptions underlie this policy?", hint: "Consider what beliefs about democracy, citizenship, enforcement costs, and individual freedom are implicit here." },
+            { type: "Steel-Man Argument", prompt: "Write the strongest possible argument FOR a position you disagree with.", hint: "The goal is to understand, not agree. What would a smart, well-meaning person say? Avoid caricaturing the opposing view." },
+            { type: "Alternative Explanations", prompt: "Fact: Crime rates dropped in the 1990s. Find 3 alternative explanations.", hint: "Think about demographics (aging population), technology (cell phones, security systems), economic factors, or cultural shifts beyond the commonly cited explanations." },
+            { type: "Spot the Fallacy", prompt: "'We've always done it this way, so it must be the right way.' What fallacy is this?", hint: "This is one of the most common fallacies in organizations and traditions. Just because something is old doesn't make it correct." },
+            { type: "Identify Assumptions", prompt: "'Hard work always leads to success.' What assumptions does this statement rely on?", hint: "Consider factors outside individual control that might affect outcomes: starting conditions, luck, systemic barriers, and how 'success' is defined." },
+            { type: "Steel-Man Argument", prompt: "Argue FOR a technology or trend you personally dislike or avoid.", hint: "What benefits do others see that you might be overlooking? Try to genuinely understand why reasonable people embrace it." }
         ];
         let streakData = { streak: 0, lastCompleted: null, completedDays: [] };
+        let hintVisible = false;
         function loadDailyChallenge() {
             const dayOfWeek = new Date().getDay();
             const challengeIndex = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
             const challenge = challenges[challengeIndex];
             document.getElementById('challenge-type').textContent = challenge.type;
             document.getElementById('challenge-prompt').textContent = challenge.prompt;
+            document.getElementById('hint-text').textContent = challenge.hint;
+        }
+        function toggleHint() {
+            hintVisible = !hintVisible;
+            const hintBox = document.getElementById('hint-box');
+            if (hintVisible) hintBox.classList.add('show');
+            else hintBox.classList.remove('show');
         }
         function showHint() {
             const dayOfWeek = new Date().getDay();
@@ -1047,11 +1196,14 @@
         // ==================== LOCAL STORAGE ====================
         function saveProgress() {
             localStorage.setItem('thinksharp_skills', JSON.stringify(skills));
+            localStorage.setItem('thinksharp_hasInteracted', hasInteracted);
             localStorage.setItem('thinksharp_weeklyGoal', document.getElementById('weekly-goal').value);
         }
         function loadProgress() {
             const savedSkills = localStorage.getItem('thinksharp_skills');
             const savedGoal = localStorage.getItem('thinksharp_weeklyGoal');
+            const savedInteracted = localStorage.getItem('thinksharp_hasInteracted');
+            const savedCards = localStorage.getItem('thinksharp_cardsReviewed');
             if (savedSkills) {
                 skills = JSON.parse(savedSkills);
                 Object.keys(skills).forEach(skill => {
@@ -1060,7 +1212,12 @@
                     document.getElementById('fill-' + skill).style.width = skills[skill] + '%';
                 });
             }
+            if (savedInteracted) hasInteracted = savedInteracted === 'true';
             if (savedGoal) document.getElementById('weekly-goal').value = savedGoal;
+            if (savedCards) {
+                cardsReviewed = parseInt(savedCards);
+                document.getElementById('cards-reviewed').textContent = cardsReviewed;
+            }
             updateCTScore();
         }
         function saveStreakData() { localStorage.setItem('thinksharp_streak', JSON.stringify(streakData)); }
